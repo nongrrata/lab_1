@@ -22,6 +22,9 @@ class Swordsman(Infantry):
     def get_type(self) -> str:
         return "Swordsman"
 
+    def _symbol(self) -> str:
+        return "SW"
+
 class Spearman(Infantry):
     def __init__(self, health, armor, attack, x, y):
         super().__init__(health, armor, attack, x, y)
@@ -36,3 +39,6 @@ class Spearman(Infantry):
 
     def get_type(self) -> str:
         return "Spearman"
+
+    def _symbol(self) -> str:
+        return "SP"

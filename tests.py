@@ -48,6 +48,8 @@ def test_iteration_mass_action():
     for unit in field:
         assert unit._health.value == 90, "Урон применился не ко всем"
 
+    print(field.render())
+
     print("✅ Сценарий 4: массовое действие через итератор")
 
 def run_all_tests():

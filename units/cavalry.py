@@ -22,6 +22,9 @@ class Cataphract(Cavalry):
     def get_type(self):
         return "Cataphract"
 
+    def _symbol(self) -> str:
+        return "CP"
+
 class HorseArcher(Cavalry):
     def __init__(self, health, armor, attack, x, y):
         super().__init__(health, armor, attack, x, y)
@@ -36,3 +39,6 @@ class HorseArcher(Cavalry):
 
     def get_type(self):
         return "HorseArcher"
+
+    def _symbol(self) -> str:
+        return "HO"

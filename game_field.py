@@ -53,6 +53,22 @@ class GameField:
             raise ValueError("Ошибка (существо не найдено)")
         return self._units[(x, y)]
 
+    def _in_bounds(self, pos: tuple[int, int]) -> bool:
+        x, y = pos
+        return (0 < x < self._width) and (0 < y < self._height)
+
+    def move_unit(self, from_pos: tuple[int, int], to_pos: tuple[int, int]):
+        if from_pos not in self._units:
+            raise KeyError(f"Нет существа в клетке {from_pos}")
+        if not self._in_bounds(to_pos):
+            raise ValueError(f"Клетка {to_pos} вне поля")
+        if to_pos in self._units:
+            raise ValueError(f"Клетка {to_pos} уже занята")
+        
+        unit = self._units.pop(from_pos)
+        unit._move(*to_pos)
+        self._units[to_pos] = unit
+
     def spawn(self, factory: UnitFactory, kind: str, x: int, y: int) -> Unit:
         unit = factory.create_unit(kind, x, y)
         self.add_unit(unit)
@@ -69,3 +85,22 @@ class GameField:
 
     def __iter__(self):
         return GameFieldIterator(self)
+
+    def symbol(self, unit: Unit | None) -> str:
+        if unit is None:
+            return "."
+        return unit._symbol()
+
+    def render(self) -> str:
+        lines = []
+        lines.append("  ".join("X" * (self._width + 2)))
+        for y in range(self._height):
+            row = []
+            for x in range(self._width):
+                unit = self._units.get((x, y))
+                CELL_W = 2
+                sym = self.symbol(unit)
+                row.append(f"{sym:^{CELL_W}}") 
+            lines.append("X  " + " ".join(row) + " X")
+        lines.append("  ".join("X" * (self._width + 2)))
+        return "\n".join(lines)

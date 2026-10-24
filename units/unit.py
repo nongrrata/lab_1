@@ -27,6 +27,9 @@ class Unit(ABC):
     def y(self): return self._y
 
     @abstractmethod
+    def _symbol(self): pass
+
+    @abstractmethod
     def clone(self) -> "Unit":
         pass
 
@@ -34,7 +37,7 @@ class Unit(ABC):
     def get_type(self) -> str:
         pass
 
-    def move(self, new_x: int, new_y: int):
+    def _move(self, new_x: int, new_y: int):
         self._x = new_x
         self._y = new_y
 

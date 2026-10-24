@@ -22,6 +22,9 @@ class LightArcher(Archer):
     def get_type(self):
         return "LightArcher"
 
+    def _symbol(self) -> str:
+        return "LA"
+
 class HeavyArcher(Archer):
     def __init__(self, health, armor, attack, x, y):
         super().__init__(health, armor, attack, x, y)
@@ -36,3 +39,6 @@ class HeavyArcher(Archer):
 
     def get_type(self):
         return "HeavyArcher"
+
+    def _symbol(self) -> str:
+        return "HA"
